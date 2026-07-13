@@ -1,0 +1,196 @@
+<!doctype html><html lang=ko><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="only light"><meta name=theme-color content="#0B2B5B"><title>달래네 청과 · NH 딩동</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{margin:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{color-scheme:light only;--navy:#0B2B5B;--blue:#1B64DA;--ink:#111F3E;--gold:#F2B705;--green:#0E7A46;--mut:#8A94A8;--line:#E8EDF5;--bg:#F3F6FB}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo',sans-serif;background:var(--bg);min-height:100vh;padding-bottom:150px;overflow-x:hidden}
+body:before{content:'';position:fixed;top:-120px;right:-100px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,#DCE8FB,transparent 70%);z-index:-1}
+body:after{content:'';position:fixed;bottom:60px;left:-140px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,#EAF2E6,transparent 70%);z-index:-1}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes ringpulse{0%,100%{box-shadow:0 0 0 0 rgba(242,183,5,.45)}50%{box-shadow:0 0 0 7px rgba(242,183,5,0)}}
+.wrap{max-width:430px;margin:0 auto}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 10px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--ink);font-size:15.5px;letter-spacing:-.2px}
+.nh{background:var(--gold);color:var(--navy);font-weight:900;border-radius:8px;padding:3px 9px;font-size:13px}
+.lock{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--green);background:#E4F4EB;border-radius:99px;padding:6px 12px}
+.hero{margin:8px 16px 0;background:linear-gradient(158deg,#1E4FA3 0%,#0B2B5B 78%);border-radius:26px;padding:24px 20px 20px;color:#fff;box-shadow:0 18px 40px -8px rgba(11,43,91,.45);animation:up .5s cubic-bezier(.2,.8,.3,1) both;position:relative;overflow:hidden}
+.hero:before{content:'';position:absolute;right:-70px;top:-90px;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.06)}
+.hero:after{content:'';position:absolute;right:30px;bottom:-110px;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.04)}
+.shop{display:flex;align-items:center;gap:14px;position:relative}
+.avatar{width:56px;height:56px;border-radius:18px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;flex:none;box-shadow:0 6px 16px rgba(0,0,0,.28);animation:ringpulse 3s 1.2s infinite}
+.shop h1{white-space:nowrap;font-size:clamp(19px,5.8vw,23px);font-weight:800;letter-spacing:-.4px}
+.tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.tag{white-space:nowrap;font-size:10px;font-weight:700;color:#CFE0FA;background:rgba(255,255,255,.12);border-radius:99px;padding:3px 9px}
+.tag.g{color:#B7F4CF;background:rgba(14,122,70,.35)}
+.acct{margin-top:18px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:14px 15px;position:relative}
+.acct .l1{display:flex;align-items:center;justify-content:space-between}
+.acct .no{white-space:nowrap;font-size:clamp(13.5px,4.4vw,16.5px);font-weight:800;color:#FFE28A;letter-spacing:.2px}
+.acct .bk{font-size:12px;color:#AFC7EE;font-weight:600;margin-bottom:3px}
+.cbtn{flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;color:#EAF1FC;font-size:11.5px;font-weight:700;background:rgba(255,255,255,.14);border:0;border-radius:9px;padding:6px 11px;font-family:inherit}
+.cbtn:active{background:rgba(255,255,255,.28)}
+.l2{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:11px;font-size:13px;color:#DCE7F8}
+.l2 b{font-weight:800;color:#fff}
+.vbadge{white-space:nowrap;display:inline-flex;align-items:center;gap:5px;background:var(--green);border-radius:99px;padding:3px 11px 3px 8px;font-size:11.5px;font-weight:800;color:#fff}
+.vbadge svg{width:12px;height:12px}
+.vbadge path{stroke-dasharray:20;stroke-dashoffset:20;animation:draw .5s .5s ease forwards}
+.demo{font-size:10.5px;color:#8FA9D6;margin-top:9px}
+.card{margin:14px 16px 0;background:#fff;border-radius:22px;padding:20px 18px;box-shadow:0 2px 6px rgba(17,31,62,.04),0 12px 28px -12px rgba(17,31,62,.10);animation:up .55s cubic-bezier(.2,.8,.3,1) both}
+.card h2{display:flex;align-items:center;gap:8px;font-size:13.5px;color:#5B6880;font-weight:700;margin-bottom:13px;letter-spacing:-.2px}
+.step{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--navy);color:#fff;font-size:11.5px;font-weight:800;align-items:center;justify-content:center}
+.amt{display:flex;align-items:center;border:2px solid var(--line);border-radius:16px;padding:14px 17px;transition:.18s;background:#FBFCFE}
+.amt:focus-within{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(27,100,218,.08)}
+.amt input{flex:1;border:0;outline:0;font-size:29px;font-weight:800;color:var(--ink);min-width:0;background:transparent;font-family:inherit;letter-spacing:-.5px}
+.amt b{font-size:18px;color:var(--ink);font-weight:700}
+.chips{display:flex;gap:8px;margin-top:12px}
+.chips button{flex:1;border:1.4px solid var(--line);background:#fff;border-radius:12px;padding:10px 0;font-size:13.5px;color:#3D5375;font-weight:700;font-family:inherit;transition:.13s}
+.chips button:active{background:var(--navy);border-color:var(--navy);color:#fff;transform:scale(.95)}
+.apps{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.app{position:relative;display:flex;align-items:center;gap:9px;border:1.4px solid var(--line);background:#fff;border-radius:18px;padding:13px 26px 13px 10px;font-size:14.5px;font-weight:800;color:#1D2C4E;text-align:left;font-family:inherit;transition:.13s;letter-spacing:-.2px}
+.app:active{transform:scale(.96);border-color:var(--blue);background:#F5F9FF}
+.app i{width:40px;height:40px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-weight:900;font-size:12.5px;box-shadow:0 4px 10px rgba(17,31,62,.16)}
+.app small{display:block;font-size:10.5px;color:#9AA4B8;font-weight:600;margin-top:2.5px;letter-spacing:0;white-space:nowrap}
+.app>span{white-space:nowrap}
+.app .ar{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#C3CCDC;font-size:17px;font-weight:400}
+.fast{position:absolute;top:-8px;right:12px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:900;border-radius:99px;padding:2.5px 9px;box-shadow:0 3px 8px rgba(242,183,5,.4)}
+.kok{width:100%;display:flex;align-items:center;gap:12px;border:0;background:linear-gradient(150deg,#FFC81E,#F2B705 60%);border-radius:18px;padding:16px 14px;font-family:inherit;text-align:left;box-shadow:0 10px 24px -4px rgba(242,183,5,.55);transition:.13s;margin-bottom:14px}
+.kok:active{transform:scale(.97)}
+.kok i{width:48px;height:48px;border-radius:15px;background:#0B2B5B;color:#F2B705;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:900;font-size:15px;flex:none}
+.kok b{display:block;font-size:16.5px;font-weight:900;color:#14264A;letter-spacing:-.3px}
+.kok small{display:block;font-size:11.5px;color:#6B5200;font-weight:700;margin-top:2px}
+.kok .ar2{margin-left:auto;color:#8A6413;font-size:20px;font-weight:700}
+.divi{display:flex;align-items:center;gap:10px;color:#9AA4B8;font-size:11.5px;font-weight:700;margin:2px 0 11px}
+.divi:before,.divi:after{content:'';flex:1;height:1px;background:var(--line)}
+.trust{display:flex;gap:10px;margin:16px 16px 0}
+.tr{flex:1;background:#fff;border-radius:16px;padding:12px 8px;text-align:center;box-shadow:0 2px 8px rgba(17,31,62,.05);animation:up .6s both}
+.tr .ic{font-size:17px}
+.tr .tt{font-size:10.5px;font-weight:700;color:#4A5872;margin-top:5px;line-height:1.4}
+.foot{margin:18px 22px 0;text-align:center;color:#9AA4B5;font-size:10.5px;line-height:1.75}
+.cta{position:fixed;left:0;right:0;bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(rgba(243,246,251,0),#F3F6FB 38%);z-index:40}
+.cta .in{max-width:430px;margin:0 auto;display:flex;gap:10px}
+.cta button{border:0;border-radius:17px;padding:17px;font-size:15.5px;font-weight:800;font-family:inherit;letter-spacing:-.2px;transition:.12s}
+.cta button:active{transform:scale(.97)}
+.cta .sec{flex:1;background:#fff;color:var(--ink);box-shadow:0 4px 16px rgba(17,31,62,.12)}
+.cta .pri{flex:1.45;background:linear-gradient(150deg,#2371F0,#0F47A8);color:#fff;box-shadow:0 10px 24px -4px rgba(27,100,218,.5)}
+#toast{position:fixed;left:50%;bottom:118px;transform:translateX(-50%) translateY(14px);background:#0E7A46;color:#fff;padding:14px 24px;border-radius:99px;font-size:14px;font-weight:800;opacity:0;transition:.28s;white-space:nowrap;z-index:80;box-shadow:0 14px 30px rgba(0,60,20,.42)}
+#toast.on{opacity:1;transform:translateX(-50%)}
+#rb{position:fixed;left:14px;right:14px;bottom:calc(100px + env(safe-area-inset-bottom));max-width:402px;margin:0 auto;background:#111F3E;color:#fff;border-radius:20px;padding:17px;display:none;z-index:50;box-shadow:0 18px 44px rgba(8,16,38,.55);animation:up .38s cubic-bezier(.2,.8,.3,1) both}
+#rb .q{font-size:15.5px;font-weight:800}
+#rb .s{font-size:12px;color:#AFC3E0;margin-top:4px;line-height:1.55}
+#rb .bs{display:flex;gap:9px;margin-top:13px}
+#rb button{flex:1;border:0;border-radius:13px;padding:13px;font-size:14px;font-weight:800;font-family:inherit}
+#rb .y{background:var(--gold);color:var(--navy)}
+#rb .x{background:rgba(255,255,255,.12);color:#D7E1F0}
+#rm{position:fixed;inset:0;background:rgba(8,16,34,.68);display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px;z-index:70;backdrop-filter:blur(3px)}
+.rc{background:#fff;border-radius:24px;max-width:410px;width:100%;padding:20px 17px 17px;animation:up .32s cubic-bezier(.2,.8,.3,1) both}
+.rc h3{font-size:16.5px;font-weight:900;color:var(--ink);text-align:center;margin-bottom:13px;letter-spacing:-.3px}
+#rcv{width:100%;border-radius:14px;border:1px solid var(--line);display:block}
+.rc .bs{display:flex;gap:9px;margin-top:13px}
+.rc button{flex:1;border:0;border-radius:13px;padding:14px;font-size:14px;font-weight:800;font-family:inherit}
+.rc .y{background:var(--navy);color:#fff}
+.rc .x{background:#EEF3FA;color:#3D5375}
+</style></head><body><div class=wrap>
+<div class=bar><div class=brand><span class=nh>NH</span>딩동 QR송금</div><div class=lock><svg width=11 height=13 viewBox="0 0 20 24" fill="none"><path d="M4 10V7a6 6 0 0112 0v3" stroke="#0E7A46" stroke-width="2.6"/><rect y="9.5" width="20" height="14" rx="4" fill="#0E7A46"/></svg>농협 보안 검증 페이지</div></div>
+
+<div class=hero>
+  <div class=shop><div class=avatar><svg width="30" height="30" viewBox="0 0 32 32"><path d="M16 9c-1-3 1-5 3-6 .5 2-.5 4-3 6z" fill="#3E7B2F"/><path d="M16 10c2.5-2.5 7-2 8.5 1.5 2 4.5-1 12.5-4.5 14.5-1.5.9-2.5.3-4-.2-1.5.5-2.5 1.1-4 .2C8.5 24 5.5 16 7.5 11.5 9 8 13.5 7.5 16 10z" fill="#E8402E"/></svg></div><div><h1>달래네 청과</h1>
+    <div class=tags><span class=tag>서산 동부시장</span><span class=tag>청과·야채</span><span class="tag g">● 영업중</span></div></div></div>
+  <div class=acct>
+    <div class=l1><div><div class=bk>받는 계좌</div><div class=no>농협 352-1234-5678-93</div></div>
+    <button class=cbtn onclick=K()><svg width=11 height=12 viewBox="0 0 20 22" fill="none"><rect x="6" width="14" height="16" rx="3" fill="#EAF1FC"/><rect y="6" width="14" height="16" rx="3" fill="#fff"/></svg>복사</button></div>
+    <div class=l2>예금주 <b>김달래</b>
+      <span class=vbadge><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>농협 실명 검증</span></div>
+    <div class=demo>위조 QR 차단 · 송금 후 영수증 발급 · 데모(가상계좌 — 실제 송금 안 됨)</div>
+  </div>
+</div>
+
+<div class=card style="animation-delay:.07s"><h2><span class=step>1</span>보낼 금액</h2>
+  <div class=amt><input id=m type=tel value=10,000 oninput="this.value=this.value.replace(/\D/g,'').replace(/\B(?=(\d{3})+(?!\d))/g,',')"><b>원</b></div>
+  <div class=chips><button onclick=S(5000)>5천</button><button onclick=S(10000)>1만</button><button onclick=S(30000)>3만</button><button onclick=S(50000)>5만</button></div>
+</div>
+
+<div class=card style="animation-delay:.13s"><h2><span class=step>2</span>보내기 · 계좌가 자동 전달됩니다</h2>
+  <button class=kok onclick="C('콕뱅크','','nh.smart.nhcok')"><i>콕</i><div><b>NH콕뱅크로 보내기</b><small>계좌·금액 자동 전달 · 가장 빠름</small></div><span class=ar2>›</span></button>
+  <div class=divi>다른 앱으로 보내기</div>
+  <div class=apps>
+  <button class=app onclick=T()><span class=fast>자동입력</span><i style=background:#1B64DA>toss</i><span>토스<small>계좌·금액 자동</small></span><span class=ar>›</span></button>
+  <button class=app onclick="C('카카오뱅크','kakaobank://','com.kakaobank.channel')"><i style="background:#FFE300;color:#3A1D1D">카뱅</i><span>카카오뱅크<small>복사 후 열기</small></span><span class=ar>›</span></button>
+  <button class=app onclick="C('KB스타뱅킹','kbbank://','com.kbstar.kbbank')"><i style=background:#5F5648>KB</i><span>KB스타뱅킹<small>복사 후 열기</small></span><span class=ar>›</span></button>
+  <button class=app onclick="C('신한 SOL','','com.shinhan.sbanking')"><i style=background:#2A5CAA>SOL</i><span>신한 SOL<small>복사 후 열기</small></span><span class=ar>›</span></button>
+  <button class=app style=grid-column:1/-1 onclick=K()><i style=background:#6B7688>···</i><span>다른 앱 사용<small>계좌번호 복사만</small></span><span class=ar>›</span></button>
+  </div>
+</div>
+
+<div class=trust>
+  <div class=tr style="animation-delay:.18s"><div class=ic><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z" fill="#2A5CAA"/><path d="M8 12l2.5 2.5L16.5 9" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg></div><div class=tt>예금주<br>실명 검증</div></div>
+  <div class=tr style="animation-delay:.22s"><div class=ic><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2h14v19l-2.3-1.6L14.4 21l-2.4-1.6L9.6 21l-2.3-1.6L5 21V2z" fill="#0E7A46"/><rect x="8" y="7" width="8" height="1.8" rx=".9" fill="#fff"/><rect x="8" y="11" width="8" height="1.8" rx=".9" fill="#fff"/><rect x="8" y="15" width="5" height="1.8" rx=".9" fill="#fff"/></svg></div><div class=tt>이체 확인<br>영수증 발급</div></div>
+  <div class=tr style="animation-delay:.26s"><div class=ic><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 3a6 6 0 016 6v4l1.8 3.2H4.2L6 13V9a6 6 0 016-6z" fill="#D89B00"/><path d="M9.8 19a2.3 2.3 0 004.4 0" stroke="#D89B00" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div><div class=tt>사장님 기기<br>실시간 알림</div></div>
+</div>
+
+<div class=foot>본 페이지는 자금을 보관·중개하지 않으며, 이체는 고객님의 은행 앱에서 직접 실행됩니다.<br>NH농협 상호금융 · 예금주 실명 검증 · 문의 1661-3000</div>
+</div>
+
+<div class=cta><div class=in><button class=sec onclick=K()>계좌 복사</button><button class=pri style="background:linear-gradient(150deg,#FFC81E,#F2B705);color:#14264A" onclick="C('콕뱅크','','nh.smart.nhcok')">콕뱅크로 바로 보내기 →</button></div></div>
+<div id=toast></div>
+
+<div id=rb><div class=q>송금을 완료하셨나요? — 현금영수증 발급</div><div class=s>소득공제용 현금영수증을 바로 발급해 드립니다.<br>실서비스: 입금 자동 확인 후 국세청 전송 · 사장님 기기에는 입금 알림 표시</div>
+<div class=bs><button class=y onclick=R()>현금영수증 발급받기</button><button class=x onclick="rb.style.display='none'">아직이요</button></div></div>
+
+<div id=rm><div class=rc><h3>현금영수증 <span style="font-size:11px;color:#8A94A8;font-weight:700">(소득공제용 · 데모)</span></h3><canvas id=rcv width=720 height=1080></canvas>
+<div class=bs><button class=y onclick=DL()>PDF로 저장</button><button class=x onclick="rm.style.display='none'">닫기</button></div></div></div>
+
+<script>
+var A='3521234567893',armed=false,rb=document.getElementById('rb'),rm=document.getElementById('rm');
+function q(){return document.getElementById('m').value.replace(/,/g,'')||'0'}
+function S(v){document.getElementById('m').value=v.toLocaleString('ko-KR')}
+function o(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t.x);t.x=setTimeout(function(){t.classList.remove('on')},2500)}
+function cp(){try{return navigator.clipboard.writeText(A)}catch(e){var a=document.createElement('textarea');a.value=A;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();return Promise.resolve()}}
+function arm(){armed=true}
+function T(){arm();o('토스로 이동 — 계좌·금액 자동입력');setTimeout(function(){location.href='supertoss://send?amount='+q()+'&bank=%EB%86%8D%ED%98%91&accountNo='+A},400)}
+function C(n,s,p){arm();cp().then(function(){o('계좌 복사됨 — '+n+'에서 붙여넣기');setTimeout(function(){if(/android/i.test(navigator.userAgent)&&p)location.href='intent://#Intent;package='+p+';end';else if(s)location.href=s},600)})}
+function K(){cp().then(function(){o('계좌번호 복사 완료')})}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&armed){armed=false;setTimeout(function(){rb.style.display='block'},500)}});
+function pad(n){return n<10?'0'+n:n}
+function R(){rb.style.display='none';
+ var c=document.getElementById('rcv'),x=c.getContext('2d'),d=new Date();
+ var F="'Pretendard Variable',sans-serif";
+ var ds=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+ var apr=''+Math.floor(100000000+Math.random()*900000000);
+ var tot=Number(q()), vat=Math.round(tot/11), sup=tot-vat;
+ x.fillStyle='#fff';x.fillRect(0,0,720,1080);
+ x.save();x.translate(360,590);x.rotate(-Math.PI/7);x.font='900 100px '+F;x.fillStyle='rgba(15,42,92,.05)';x.textAlign='center';x.fillText('DEMO',0,0);x.restore();x.textAlign='left';
+ x.fillStyle='#0B2B5B';x.fillRect(0,0,720,122);
+ x.fillStyle='#F2B705';x.beginPath();x.roundRect(36,36,66,48,10);x.fill();
+ x.fillStyle='#0B2B5B';x.font='900 27px '+F;x.fillText('NH',49,69);
+ x.fillStyle='#fff';x.font='900 36px '+F;x.fillText('현금영수증',122,76);
+ x.font='500 19px '+F;x.fillStyle='#AFC3E0';x.fillText('소득공제용 · NH 딩동',470,73);
+ x.fillStyle='#0E7A46';x.font='900 62px '+F;x.textAlign='center';x.fillText(tot.toLocaleString()+'원',360,224);
+ x.font='700 22px '+F;x.fillStyle='#4A5568';x.fillText('승인거래 · 계좌이체(QR)',360,262);x.textAlign='left';
+ function dash(y){x.strokeStyle='#D8E0EC';x.setLineDash([8,7]);x.beginPath();x.moveTo(36,y);x.lineTo(684,y);x.stroke();x.setLineDash([])}
+ dash(298);
+ var rows=[['승인번호',apr+' (데모)'],['거래일시',ds],['거래구분','승인거래 · 소득공제'],['식별번호','010-****-5678'],['상호(가맹점)','달래네 청과'],['사업자등록번호','000-00-00000 (데모)'],['대표자 / 결제수단','김달래 / 계좌이체 · NH 딩동']];
+ var y=344;rows.forEach(function(r){x.fillStyle='#7A8598';x.font='500 22px '+F;x.fillText(r[0],36,y);x.fillStyle='#16294E';x.font='700 22px '+F;x.fillText(r[1],258,y);y+=51});
+ dash(y-12);
+ var amts=[['공급가액',sup],['부가세',vat],['총 거래금액',tot]];
+ y+=32;
+ amts.forEach(function(a,i){
+  x.fillStyle= i==2 ? '#0B2B5B' : '#7A8598'; x.font=(i==2?'900 26px ':'500 23px ')+F; x.fillText(a[0],36,y);
+  x.textAlign='right'; x.fillStyle= i==2 ? '#0B2B5B' : '#16294E'; x.font=(i==2?'900 26px ':'700 23px ')+F; x.fillText(a[1].toLocaleString()+'원',684,y); x.textAlign='left';
+  y+=i==1?54:46});
+ dash(y-8);
+ x.fillStyle='#7A8598';x.font='500 19px '+F;
+ x.fillText('· 실서비스에서는 입금 자동 확인 후 국세청 홈택스로 전송되며,',36,y+30);
+ x.fillText('  홈택스(현금영수증 조회)에서 확인 가능합니다.',36,y+58);
+ x.fillText('· 본 문서는 데모 연출용으로 법적 효력이 없습니다.',36,y+90);
+ x.fillStyle='#EEF3FA';x.fillRect(0,1016,720,64);
+ x.fillStyle='#3D5375';x.font='700 20px '+F;x.fillText('NH 딩동 — 딩동! 손님이 와도, 돈이 와도',36,1056);
+ rm.style.display='flex'}
+function DL(){var c=document.getElementById('rcv');
+ try{var J=window.jspdf.jsPDF;var pdf=new J({unit:'px',format:[540,810],compress:true});
+  pdf.addImage(c.toDataURL('image/jpeg',0.92),'JPEG',0,0,540,810);
+  pdf.save('현금영수증_달래네청과.pdf');o('현금영수증 PDF가 저장되었습니다');}
+ catch(e){var a=document.createElement('a');a.download='현금영수증_달래네청과.png';a.href=c.toDataURL('image/png');document.body.appendChild(a);a.click();a.remove();o('영수증이 저장되었습니다(PNG)');}}
+</script>
+</body></html>
