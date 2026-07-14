@@ -122,7 +122,7 @@ body:after{content:'';position:fixed;bottom:60px;left:-140px;width:380px;height:
     <button class=cbtn onclick=K()><svg width=11 height=12 viewBox="0 0 20 22" fill="none"><rect x="6" width="14" height="16" rx="3" fill="#EAF1FC"/><rect y="6" width="14" height="16" rx="3" fill="#fff"/></svg>복사</button></div>
     <div class=l2>예금주 <b>김달래</b>
       <span class=vbadge><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>농협 실명 검증</span></div>
-    <div class=demo>위조 QR 차단 · 송금 후 영수증 발급 · 데모 v4(가상계좌 — 실제 송금 안 됨)</div>
+    <div class=demo>위조 QR 차단 · 송금 후 영수증 발급 · 데모 v5(가상계좌 — 실제 송금 안 됨)</div>
   </div>
 </div>
 
@@ -132,7 +132,7 @@ body:after{content:'';position:fixed;bottom:60px;left:-140px;width:380px;height:
 </div>
 
 <div class=card style="animation-delay:.13s"><h2><span class=step>2</span>보내기 · 계좌가 자동 전달됩니다</h2>
-  <button class=kok onclick="C('콕뱅크','','nh.smart.nhcok')"><i>콕</i><div><b>NH콕뱅크로 보내기</b><small>계좌·금액 자동 전달 · 가장 빠름</small></div><span class=ar2>›</span></button>
+  <button class=kok onclick="C('콕뱅크','nhcok://','nh.smart.nhcok')"><i>콕</i><div><b>NH콕뱅크로 보내기</b><small>계좌·금액 자동 전달 · 가장 빠름</small></div><span class=ar2>›</span></button>
   <div class=divi>다른 앱으로 보내기</div>
   <div class=apps>
   <button class=app onclick=T()><span class=fast>자동입력</span><i style=background:#1B64DA>toss</i><span>토스<small>계좌·금액 자동</small></span><span class=ar>›</span></button>
@@ -152,7 +152,7 @@ body:after{content:'';position:fixed;bottom:60px;left:-140px;width:380px;height:
 <div class=foot>본 페이지는 자금을 보관·중개하지 않으며, 이체는 고객님의 은행 앱에서 직접 실행됩니다.<br>NH농협 상호금융 · 예금주 실명 검증 · 문의 1661-3000</div>
 </div>
 
-<div class=cta><div class=in><button class=sec onclick=K()>계좌 복사</button><button class=pri style="background:linear-gradient(150deg,#FFC81E,#F2B705);color:#14264A" onclick="C('콕뱅크','','nh.smart.nhcok')">콕뱅크로 바로 보내기 →</button></div></div>
+<div class=cta><div class=in><button class=sec onclick=K()>계좌 복사</button><button class=pri style="background:linear-gradient(150deg,#FFC81E,#F2B705);color:#14264A" onclick="C('콕뱅크','nhcok://','nh.smart.nhcok')">콕뱅크로 바로 보내기 →</button></div></div>
 <div id=toast></div>
 
 <div id=rb><div class=q>송금을 완료하셨나요? — 현금영수증 발급</div><div class=s>소득공제용 현금영수증을 바로 발급해 드립니다.<br>실서비스: 입금 자동 확인 후 국세청 전송 · 사장님 기기에는 입금 알림 표시</div>
@@ -167,11 +167,11 @@ if(!CanvasRenderingContext2D.prototype.roundRect){CanvasRenderingContext2D.proto
 function q(){return document.getElementById('m').value.replace(/,/g,'')||'0'}
 function S(v){document.getElementById('m').value=v.toLocaleString('ko-KR')}
 function o(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t.x);t.x=setTimeout(function(){t.classList.remove('on')},2500)}
-function cp(){try{return navigator.clipboard.writeText(A)}catch(e){var a=document.createElement('textarea');a.value=A;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();return Promise.resolve()}}
+function cp(){try{var a=document.createElement('textarea');a.value=A;a.style.cssText='position:fixed;top:0;opacity:0';document.body.appendChild(a);a.focus();a.select();document.execCommand('copy');a.remove()}catch(e){}try{if(navigator.clipboard)navigator.clipboard.writeText(A)}catch(e){}}
 function arm(){armed=true}
 function T(){arm();o('토스로 이동 — 계좌·금액 자동입력');setTimeout(function(){location.href='supertoss://send?amount='+q()+'&bank=%EB%86%8D%ED%98%91&accountNo='+A},400)}
-function C(n,s,p){arm();cp().then(function(){o('계좌 복사됨 — '+n+'에서 붙여넣기');setTimeout(function(){if(/android/i.test(navigator.userAgent)&&p)location.href='intent://#Intent;package='+p+';end';else if(s)location.href=s;else o('계좌·금액 복사 완료 — '+n+' 앱에서 붙여넣기 하세요')},600)})}
-function K(){cp().then(function(){o('계좌번호 복사 완료')})}
+function C(n,s,p){arm();cp();if(/android/i.test(navigator.userAgent)&&p){o(n+' 열기 — 계좌 붙여넣기');location.href='intent://#Intent;package='+p+';end';return}if(s){o(n+' 열기 — 계좌 붙여넣기');location.href=s;return}o('계좌·금액 복사 완료 — '+n+' 앱에서 붙여넣기 하세요')}
+function K(){cp();o('계좌번호 복사 완료')}
 document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&armed){armed=false;setTimeout(function(){rb.style.display='block'},500)}});
 function pad(n){return n<10?'0'+n:n}
 function R(){
