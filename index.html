@@ -122,7 +122,7 @@ body:after{content:'';position:fixed;bottom:60px;left:-140px;width:380px;height:
     <button class=cbtn onclick=K()><svg width=11 height=12 viewBox="0 0 20 22" fill="none"><rect x="6" width="14" height="16" rx="3" fill="#EAF1FC"/><rect y="6" width="14" height="16" rx="3" fill="#fff"/></svg>복사</button></div>
     <div class=l2>예금주 <b>김달래</b>
       <span class=vbadge><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>농협 실명 검증</span></div>
-    <div class=demo>위조 QR 차단 · 송금 후 영수증 발급 · 데모 v3(가상계좌 — 실제 송금 안 됨)</div>
+    <div class=demo>위조 QR 차단 · 송금 후 영수증 발급 · 데모 v4(가상계좌 — 실제 송금 안 됨)</div>
   </div>
 </div>
 
@@ -170,7 +170,7 @@ function o(m){var t=document.getElementById('toast');t.textContent=m;t.classList
 function cp(){try{return navigator.clipboard.writeText(A)}catch(e){var a=document.createElement('textarea');a.value=A;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();return Promise.resolve()}}
 function arm(){armed=true}
 function T(){arm();o('토스로 이동 — 계좌·금액 자동입력');setTimeout(function(){location.href='supertoss://send?amount='+q()+'&bank=%EB%86%8D%ED%98%91&accountNo='+A},400)}
-function C(n,s,p){arm();cp().then(function(){o('계좌 복사됨 — '+n+'에서 붙여넣기');setTimeout(function(){if(/android/i.test(navigator.userAgent)&&p)location.href='intent://#Intent;package='+p+';end';else if(s)location.href=s},600)})}
+function C(n,s,p){arm();cp().then(function(){o('계좌 복사됨 — '+n+'에서 붙여넣기');setTimeout(function(){if(/android/i.test(navigator.userAgent)&&p)location.href='intent://#Intent;package='+p+';end';else if(s)location.href=s;else o('계좌·금액 복사 완료 — '+n+' 앱에서 붙여넣기 하세요')},600)})}
 function K(){cp().then(function(){o('계좌번호 복사 완료')})}
 document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&armed){armed=false;setTimeout(function(){rb.style.display='block'},500)}});
 function pad(n){return n<10?'0'+n:n}
