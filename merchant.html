@@ -1,0 +1,161 @@
+<!doctype html><html lang=ko><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name=color-scheme content="only light"><meta name=theme-color content="#0A8C3F">
+<title>NH콕뱅크 · 사장님 (딩동 설정)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<style>
+*{margin:0;box-sizing:border-box;font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo',sans-serif;-webkit-tap-highlight-color:transparent}
+:root{color-scheme:light only;--nh:#0A8C3F;--nhd:#076B30;--gold:#F2B705;--ink:#18202B;--mut:#7A8698;--line:#E9EEF3;--bg:#F4F7F9}
+body{background:var(--bg);min-height:100vh;padding-bottom:40px}
+.wrap{max-width:440px;margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.06)}
+.bar{display:flex;align-items:center;gap:10px;padding:16px 20px 14px;background:linear-gradient(140deg,#0FA24A,#076B30);color:#fff}
+.bar .nh{background:#fff;color:var(--nhd);font-weight:900;border-radius:7px;padding:3px 8px;font-size:12px}
+.bar h1{font-size:16px;font-weight:800}
+.bar .tag{margin-left:auto;font-size:10.5px;font-weight:700;background:rgba(255,255,255,.18);border-radius:99px;padding:4px 10px}
+.body{padding:18px 18px 8px}
+.sec{font-size:12.5px;font-weight:800;color:var(--mut);margin:20px 2px 9px;letter-spacing:-.2px}
+.sec:first-child{margin-top:4px}
+.fl{font-size:12.5px;font-weight:800;color:var(--ink);margin:14px 2px 7px}
+.fl .req{color:var(--nh);margin-left:3px}
+input.tin,select.tin{width:100%;border:1.6px solid var(--line);border-radius:13px;padding:14px 15px;font-size:15.5px;font-weight:700;color:var(--ink);background:#FBFCFD;outline:none;-webkit-appearance:none}
+input.tin:focus,select.tin:focus{border-color:var(--nh);background:#fff;box-shadow:0 0 0 4px rgba(10,140,63,.08)}
+.row2{display:flex;gap:10px}.row2>div{flex:1}
+.hint{font-size:11px;color:var(--mut);margin-top:6px;line-height:1.5}
+/* backgrounds */
+.bgs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:2px}
+.bgs .b{height:52px;border-radius:12px;border:2.5px solid transparent;cursor:pointer;position:relative;background-size:cover;background-position:center}
+.bgs .b.on{border-color:var(--nh)}
+.bgs .b.on:after{content:'✓';position:absolute;top:2px;right:5px;color:#fff;font-size:13px;font-weight:900;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.upl{margin-top:9px;border:1.8px dashed #B9E2C8;border-radius:13px;background:#F2FBF5;padding:13px;text-align:center;font-size:12.5px;font-weight:700;color:var(--nhd);cursor:pointer}
+.upl input{display:none}
+/* device preview */
+.prev{margin-top:16px;background:var(--bg);border-radius:18px;padding:16px;display:flex;flex-direction:column;align-items:center}
+.prev .cap{font-size:11px;font-weight:700;color:var(--mut);margin-bottom:11px;align-self:flex-start}
+.bez{width:230px;height:172px;background:#12303f;border-radius:15px;padding:10px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.scr{width:100%;height:100%;border-radius:8px;overflow:hidden;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#FFF6DC,#FCEFC4);background-size:cover;background-position:center;color:#14264A;text-align:center}
+.scr.dark{color:#fff}
+.scr .mn{position:absolute;top:9px;left:9px;font-size:9px;font-weight:800;color:var(--nh);background:#fff;border-radius:5px;padding:2px 7px}
+.scr .sh{font-size:23px;font-weight:900;letter-spacing:-.5px;padding:0 8px;text-shadow:0 1px 6px rgba(0,0,0,.15)}
+.scr .tg{font-size:10px;margin-top:4px;opacity:.9}
+.scr .ob{font-size:8.5px;font-weight:800;color:#fff;background:var(--nh);border-radius:99px;padding:2px 9px;margin-top:8px}
+/* make button */
+.mk{width:100%;border:0;border-radius:16px;padding:17px;font-size:16px;font-weight:800;font-family:inherit;background:var(--nh);color:#fff;box-shadow:0 10px 24px -4px rgba(10,140,63,.5);margin-top:22px}
+.mk:active{transform:scale(.98)}
+.mk:disabled{background:#B9C6CE;box-shadow:none}
+/* result */
+#result{display:none;margin-top:22px;border-top:1px dashed var(--line);padding-top:22px}
+.qrcard{background:linear-gradient(160deg,#0FA24A,#076B30);border-radius:22px;padding:22px 20px;text-align:center;color:#fff}
+.qrcard .mn{font-size:12px;font-weight:800;background:rgba(255,255,255,.16);display:inline-block;border-radius:99px;padding:4px 13px}
+.qrcard .sh{font-size:20px;font-weight:900;margin-top:10px;letter-spacing:-.4px}
+.qrbx{width:196px;height:196px;background:#fff;border-radius:16px;margin:14px auto 12px;padding:13px;display:flex;align-items:center;justify-content:center}
+.qrbx img,.qrbx canvas{width:100%!important;height:100%!important;image-rendering:pixelated}
+.qrcard .tag2{font-size:11.5px;color:#D6F2E0;line-height:1.5}
+.qrcard .tag2 b{color:#fff}
+.urlbx{margin-top:14px;background:#F4F7F9;border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:11px;color:#4A5568;word-break:break-all;line-height:1.5}
+.btns{display:flex;gap:10px;margin-top:14px}
+.btns a,.btns button{flex:1;text-align:center;text-decoration:none;border:0;border-radius:14px;padding:15px;font-size:14px;font-weight:800;font-family:inherit;cursor:pointer}
+.btns .pri{background:var(--nh);color:#fff}
+.btns .sec2{background:#EDF3F0;color:var(--nhd)}
+.note{font-size:11px;color:var(--mut);text-align:center;margin-top:14px;line-height:1.6}
+</style></head><body><div class=wrap>
+<div class=bar><span class=nh>NH</span><h1>사장님 · 딩동 설정</h1><span class=tag>특화상품 가입됨</span></div>
+<div class=body>
+
+  <div class=sec>1 · 가게 정보</div>
+  <div class=fl>상호명<span class=req>*</span></div>
+  <input class=tin id=name value="달래네 청과" placeholder="예: 달래네 청과" oninput=prev()>
+  <div class=row2>
+    <div><div class=fl>업종</div><input class=tin id=cat value="청과·야채" oninput=prev()></div>
+    <div><div class=fl>예금주</div><input class=tin id=owner value="김달래"></div>
+  </div>
+
+  <div class=sec>2 · 수취계좌 (농협)</div>
+  <div class=fl>계좌번호<span class=req>*</span></div>
+  <input class=tin id=acct value="352-1234-5678-93" inputmode=numeric placeholder="농협 계좌번호" >
+  <div class=hint>이 계좌로 손님 송금이 들어옵니다. 하이픈(-) 포함해 입력해도 됩니다.</div>
+
+  <div class=sec>3 · 기기 간판 배경</div>
+  <div class=bgs id=bgs>
+    <div class="b on" data-c="#FFF6DC,#FCEFC4" data-dark="0" style="background:linear-gradient(160deg,#FFF6DC,#FCEFC4)"></div>
+    <div class=b data-c="#0FA24A,#076B30" data-dark="1" style="background:linear-gradient(160deg,#0FA24A,#076B30)"></div>
+    <div class=b data-c="#1E4FA3,#0B2B5B" data-dark="1" style="background:linear-gradient(160deg,#1E4FA3,#0B2B5B)"></div>
+    <div class=b data-c="#E8402E,#B21F12" data-dark="1" style="background:linear-gradient(160deg,#E8402E,#B21F12)"></div>
+  </div>
+  <label class=upl>내 사진·로고 올리기 (JPG·PNG)<input type=file accept="image/*" id=upfile></label>
+
+  <div class=prev>
+    <div class=cap>기기 미리보기 (평상시 간판 모드)</div>
+    <div class=bez><div class=scr id=scr><div class=mn>NH 농협</div><div class=sh id=pvName>달래네 청과</div><div class=tg id=pvCat>청과·야채</div><div class=ob>● 영업중</div></div></div>
+  </div>
+
+  <button class=mk id=mkbtn onclick=make()>계좌 QR 만들기</button>
+
+  <div id=result>
+    <div class=qrcard>
+      <span class=mn>NH 딩동 · 계좌 QR</span>
+      <div class=sh id=qrName>달래네 청과</div>
+      <div class=qrbx id=qrbx></div>
+      <div class=tag2><b>어떤 앱으로 찍어도</b> 농협 계좌로 송금<br>(콕뱅크·토스·카뱅·KB 모두 인식)</div>
+    </div>
+    <div class=urlbx id=urlbx></div>
+    <div class=btns>
+      <button class=sec2 onclick=saveimg()>이미지 저장</button>
+      <a class=pri id=openlink target=_blank>손님 페이지 열기 →</a>
+    </div>
+    <div class=note>이 QR을 스마트폰 카메라로 찍으면 손님이 보는 송금 페이지로 연결됩니다.<br>실서비스에서는 "기기로 전송"으로 딩동 기기 화면에 바로 표시됩니다.</div>
+  </div>
+
+</div></div>
+
+<script>
+var bgSel="#FFF6DC,#FCEFC4", bgDark=false, bgImg=null;
+// 쿠션페이지(손님 송금 페이지) base URL — 같은 폴더의 index.html
+var CUSHION=location.href.split('merchant.html')[0];
+function $(id){return document.getElementById(id)}
+function prev(){
+  $('pvName').textContent=$('name').value||'상호명';
+  $('pvCat').textContent=$('cat').value||'';
+  $('qrName').textContent=$('name').value||'상호명';
+}
+// 배경 선택
+document.querySelectorAll('#bgs .b').forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll('#bgs .b').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    bgImg=null; bgSel=b.dataset.c; bgDark=b.dataset.dark==='1';
+    applyBg();
+  };
+});
+function applyBg(){
+  var scr=$('scr');
+  if(bgImg){scr.style.background="url('"+bgImg+"') center/cover"; scr.classList.add('dark');}
+  else{var p=bgSel.split(','); scr.style.background='linear-gradient(160deg,'+p[0]+','+p[1]+')'; scr.classList.toggle('dark',bgDark);}
+}
+$('upfile').onchange=function(e){
+  var f=e.target.files[0]; if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){bgImg=r.result; document.querySelectorAll('#bgs .b').forEach(function(x){x.classList.remove('on')}); applyBg();};
+  r.readAsDataURL(f);
+};
+// QR 생성
+function make(){
+  var name=$('name').value.trim()||'상호명';
+  var acct=$('acct').value.trim();
+  var owner=$('owner').value.trim();
+  var cat=$('cat').value.trim();
+  if(!acct){alert('계좌번호를 입력해 주세요.');return;}
+  var url=CUSHION+'?n='+encodeURIComponent(name)+'&a='+encodeURIComponent(acct)+'&b='+encodeURIComponent('농협')+'&h='+encodeURIComponent(owner)+'&c='+encodeURIComponent(cat);
+  var q=qrcode(0,'M');q.addData(url);q.make();$('qrbx').innerHTML=q.createImgTag(5,8);
+  $('urlbx').textContent=url;
+  $('openlink').href=url;
+  $('result').style.display='block';
+  $('result').scrollIntoView({behavior:'smooth'});
+}
+function saveimg(){
+  var img=$('qrbx').querySelector('img'); if(!img)return;
+  var data=img.src;
+  var a=document.createElement('a'); a.href=data; a.download='딩동_QR_'+($('name').value||'가게')+'.png';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+</script>
+</body></html>

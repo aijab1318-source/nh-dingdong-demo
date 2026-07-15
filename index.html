@@ -122,7 +122,7 @@ body:after{content:'';position:fixed;bottom:60px;left:-140px;width:380px;height:
     <button class=cbtn onclick=K()><svg width=11 height=12 viewBox="0 0 20 22" fill="none"><rect x="6" width="14" height="16" rx="3" fill="#EAF1FC"/><rect y="6" width="14" height="16" rx="3" fill="#fff"/></svg>복사</button></div>
     <div class=l2>예금주 <b>김달래</b>
       <span class=vbadge><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>농협 실명 검증</span></div>
-    <div class=demo>위조 QR 차단 · 송금 후 영수증 발급 · 데모 v5(가상계좌 — 실제 송금 안 됨)</div>
+    <div class=demo>위조 QR 차단 · 송금 후 영수증 발급 · 데모 v6(가상계좌 — 실제 송금 안 됨)</div>
   </div>
 </div>
 
@@ -162,7 +162,14 @@ body:after{content:'';position:fixed;bottom:60px;left:-140px;width:380px;height:
 <div class=bs><button class=y onclick=DL()>PDF로 저장</button><button class=x onclick="rm.style.display='none'">닫기</button></div></div></div>
 
 <script>
-var A='3521234567893',armed=false,rb=document.getElementById('rb'),rm=document.getElementById('rm');
+var A='3521234567893',SN='달래네 청과',OWN='김달래',BK='농협',armed=false,rb=document.getElementById('rb'),rm=document.getElementById('rm');
+(function(){try{var Q=new URLSearchParams(location.search),v;
+ if((v=Q.get('b')))BK=v;
+ if((v=Q.get('a'))){A=(v.replace(/\D/g,'')||A);var no=document.querySelector('.no');if(no)no.textContent=BK+' '+v;}
+ if((v=Q.get('n'))){SN=v;var h1=document.querySelector('.shop h1');if(h1)h1.textContent=v;}
+ if((v=Q.get('h'))){OWN=v;var ob=document.querySelector('.l2 b');if(ob)ob.textContent=v;}
+ if((v=Q.get('c'))){var tg=document.querySelectorAll('.tags .tag');if(tg[1])tg[1].textContent=v;}
+}catch(e){}})();
 if(!CanvasRenderingContext2D.prototype.roundRect){CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){this.rect(x,y,w,h);return this}}
 function q(){return document.getElementById('m').value.replace(/,/g,'')||'0'}
 function S(v){document.getElementById('m').value=v.toLocaleString('ko-KR')}
